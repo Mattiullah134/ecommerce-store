@@ -67,7 +67,7 @@ const NavBar = ({ logout, user, cart, addToCart, removeToCart, clearCart, subTot
                 <div className="container mx-auto flex p-2 md:flex-row flex-col items-center justify-start max-sm:gap-1 gap-5 ">
                     <div className="flex title-font font-medium items-center text-gray-900 mb-4 max-sm:mr-auto md:mb-0 ">
                         <Link href={'/'}><img src="/ecommLogo.png" width={50} alt="" /></Link>
-                        <span className="ml-3 max-sm:text-sm text-xl">HassanElectric's</span>
+                        <span className="ml-3 max-sm:text-sm text-xl">Matti's Store</span>
                     </div>
                     <nav className=" flex flex-wrap items-center text-base justify-center text-center">
                         <Link href={'/tshirts'}>
