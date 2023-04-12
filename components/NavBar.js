@@ -16,7 +16,7 @@ const NavBar = ({ logout, user, cart, addToCart, removeToCart, clearCart, subTot
     const ref = useRef()
     useEffect(() => {
         // Object.keys(cart).length !== 0 && setSideBar(false)
-        let exempted = ['/checkout', '/orders', '/order']
+        let exempted = ['/checkout', '/orders', '/order', '/myaccount']
         if (exempted.includes(router.pathname)) {
             setSideBar(false)
         }
@@ -64,7 +64,7 @@ const NavBar = ({ logout, user, cart, addToCart, removeToCart, clearCart, subTot
                 theme="light"
             />
             <header className="text-gray-600 bg-slate-50 z-20 body-font shadow-xl mb-1 fixed top-0 right-0 left-0">
-                <div className="container mx-auto flex p-2 md:flex-row flex-col items-center justify-start gap-5 ">
+                <div className="container mx-auto flex p-2 md:flex-row flex-col items-center justify-start max-sm:gap-1 gap-5 ">
                     <div className="flex title-font font-medium items-center text-gray-900 mb-4 max-sm:mr-auto md:mb-0 ">
                         <Link href={'/'}><img src="/ecommLogo.png" width={50} alt="" /></Link>
                         <span className="ml-3 max-sm:text-sm text-xl">HassanElectric's</span>

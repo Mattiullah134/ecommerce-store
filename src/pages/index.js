@@ -4,6 +4,7 @@ import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
 import NavBar from 'components/NavBar'
 import Footer from 'components/Footer'
+import Link from 'next/link'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,86 +18,61 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div>
-          <img src="/bannerimg1.jpg" alt="" />
-        </div>
-        <section className="text-gray-600 body-font">
+
+
+        <section className="text-gray-600 body-font max-sm:mt-20">
           <div className="container px-5 py-24 mx-auto">
             <div className="flex flex-wrap w-full mb-20 flex-col items-center text-center">
-              <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">Pitchfork Kickstarter Taxidermy</h1>
-              <p className="lg:w-1/2 w-full leading-relaxed text-gray-500">Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify, subway tile poke farm-to-table.</p>
+
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="grid gap-4">
+                  <Link href={'/tshirts'} className='cursor-pointer '>
+                    <img className="h-auto max-w-full rounded-lg" src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8dCUyMHNoaXJ0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="" />
+                  </Link>
+                  <div className='cursor-pointer'>
+                    <img className="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-1.jpg" alt="" />
+                  </div>
+                  <div className='cursor-pointer'>
+                    <img className="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-2.jpg" alt="" />
+                  </div>
+                </div>
+                <div className="cursor-pointer grid gap-4">
+                  <Link href={'/hoodies'}>
+                    <img className="h-auto max-w-full rounded-lg" src="https://images.unsplash.com/photo-1618333262686-d0bdf1e9089f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=911&q=80" alt="" />
+                  </Link>
+                  <Link href={'/stickers'}>
+                    <img className="h-auto max-w-full rounded-lg" src="https://images.unsplash.com/photo-1512455102796-376c00aaacb8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" alt="" />
+                  </Link>
+                  <div>
+                    <img className="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-5.jpg" alt="" />
+                  </div>
+                </div>
+                <div className="cursor-pointer grid gap-4">
+                  <Link href={'/mugs'}>
+                    <img className="h-auto max-w-full rounded-lg" src="https://images.unsplash.com/photo-1542556398-95fb5b9f9b48?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80" alt="" />
+                  </Link>
+                  <div>
+                    <img className="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-7.jpg" alt="" />
+                  </div>
+                  <div>
+                    <img className="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-8.jpg" alt="" />
+                  </div>
+                </div>
+                <div className="cursor-pointer grid gap-4">
+                  <div>
+                    <img className="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-9.jpg" alt="" />
+                  </div>
+                  <div>
+                    <img className="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-10.jpg" alt="" />
+                  </div>
+                  <div>
+                    <img className="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-11.jpg" alt="" />
+                  </div>
+                </div>
+              </div>
+
             </div>
-            <div className="flex flex-wrap -m-4">
-              <div className="xl:w-1/3 md:w-1/2 p-4">
-                <div className="border border-gray-200 p-6 rounded-lg">
-                  <div className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
-                    <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-6 h-6" viewBox="0 0 24 24">
-                      <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                    </svg>
-                  </div>
-                  <h2 className="text-lg text-gray-900 font-medium title-font mb-2">Shooting Stars</h2>
-                  <p className="leading-relaxed text-base">Fingerstache flexitarian street art 8-bit waist co, subway tile poke farm.</p>
-                </div>
-              </div>
-              <div className="xl:w-1/3 md:w-1/2 p-4">
-                <div className="border border-gray-200 p-6 rounded-lg">
-                  <div className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
-                    <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-6 h-6" viewBox="0 0 24 24">
-                      <circle cx="6" cy="6" r="3"></circle>
-                      <circle cx="6" cy="18" r="3"></circle>
-                      <path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12"></path>
-                    </svg>
-                  </div>
-                  <h2 className="text-lg text-gray-900 font-medium title-font mb-2">The Catalyzer</h2>
-                  <p className="leading-relaxed text-base">Fingerstache flexitarian street art 8-bit waist co, subway tile poke farm.</p>
-                </div>
-              </div>
-              <div className="xl:w-1/3 md:w-1/2 p-4">
-                <div className="border border-gray-200 p-6 rounded-lg">
-                  <div className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
-                    <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-6 h-6" viewBox="0 0 24 24">
-                      <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
-                      <circle cx="12" cy="7" r="4"></circle>
-                    </svg>
-                  </div>
-                  <h2 className="text-lg text-gray-900 font-medium title-font mb-2">Neptune</h2>
-                  <p className="leading-relaxed text-base">Fingerstache flexitarian street art 8-bit waist co, subway tile poke farm.</p>
-                </div>
-              </div>
-              <div className="xl:w-1/3 md:w-1/2 p-4">
-                <div className="border border-gray-200 p-6 rounded-lg">
-                  <div className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
-                    <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-6 h-6" viewBox="0 0 24 24">
-                      <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1zM4 22v-7"></path>
-                    </svg>
-                  </div>
-                  <h2 className="text-lg text-gray-900 font-medium title-font mb-2">Melanchole</h2>
-                  <p className="leading-relaxed text-base">Fingerstache flexitarian street art 8-bit waist co, subway tile poke farm.</p>
-                </div>
-              </div>
-              <div className="xl:w-1/3 md:w-1/2 p-4">
-                <div className="border border-gray-200 p-6 rounded-lg">
-                  <div className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
-                    <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-6 h-6" viewBox="0 0 24 24">
-                      <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
-                    </svg>
-                  </div>
-                  <h2 className="text-lg text-gray-900 font-medium title-font mb-2">Bunker</h2>
-                  <p className="leading-relaxed text-base">Fingerstache flexitarian street art 8-bit waist co, subway tile poke farm.</p>
-                </div>
-              </div>
-              <div className="xl:w-1/3 md:w-1/2 p-4">
-                <div className="border border-gray-200 p-6 rounded-lg">
-                  <div className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
-                    <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-6 h-6" viewBox="0 0 24 24">
-                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                    </svg>
-                  </div>
-                  <h2 className="text-lg text-gray-900 font-medium title-font mb-2">Ramona Falls</h2>
-                  <p className="leading-relaxed text-base">Fingerstache flexitarian street art 8-bit waist co, subway tile poke farm.</p>
-                </div>
-              </div>
-            </div>
+
             <button className="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Button</button>
           </div>
         </section>

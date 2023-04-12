@@ -5,10 +5,15 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Products from '../../../models/Products'
 import mongoose from 'mongoose';
-const Product = ({ cart, addToCart, product, variants, buyNow }) => {
+import Error from 'next/error'
+const Product = ({ errorCode, cart, addToCart, product, variants, buyNow }) => {
+
+
     const [color, setColor] = useState(product[0].color)
-    const [size, setSize] = useState(product[0].size)
-    console.log(product[0].img);
+    const [size, setSize] = useState(product[0].size);
+
+    const [disabled, setDisabled] = useState(false)
+    console.log(product);
     const router = useRouter()
 
     const { slug } = router.query;
@@ -16,6 +21,10 @@ const Product = ({ cart, addToCart, product, variants, buyNow }) => {
     const [serviceAbility, setServiceAbility] = useState(null);
 
     useEffect(() => {
+
+        if (product[0].availableQuantity === 0) {
+            setDisabled(true)
+        }
 
     }, [])
 
@@ -58,7 +67,9 @@ const Product = ({ cart, addToCart, product, variants, buyNow }) => {
         }
     }
 
-
+    // if (errorCode === 404) {
+    //     return <Error statusCode={errorCode} />
+    // }
 
     return <>
         <section className="text-gray-600 body-font overflow-hidden md:mt-5 mt-10">
@@ -150,23 +161,19 @@ const Product = ({ cart, addToCart, product, variants, buyNow }) => {
                             </div>
                         </div>
                         <div className="flex">
-                            <span className="title-font font-medium text-2xl text-gray-900">RS : {product[0].price}</span>
-                            <button onClick={() => buyNow(slug, 1, product[0].price, product[0].img, product[0].title, size, color)} className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Buy Now</button>
-                            <button onClick={() => {
+                            <span className="title-font font-medium text-2xl text-gray-900"> {!disabled ? `RS : ${product[0].price}` : <span className='text-red-600'>Out of stock</span>}</span>
+                            <button disabled={disabled} onClick={() => buyNow(slug, 1, product[0].price, product[0].img, product[0].title, size, color)} className="flex ml-auto text-white bg-indigo-500 disabled:bg-indigo-200 disabled:cursor-not-allowed border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Buy Now</button>
+                            <button disabled={disabled} onClick={() => {
                                 addToCart(slug, 1, product[0].price, product[0].title, product[0].img, size, color)
                                 toast("Product add to the cart")
-                            }} className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Add to Cart</button>
-                            <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
-                                <svg fill="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-5 h-5" viewBox="0 0 24 24">
-                                    <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
-                                </svg>
-                            </button>
+                            }} className="flex ml-auto text-white bg-indigo-500 disabled:bg-indigo-200 disabled:cursor-not-allowed border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Add to Cart</button>
+
                         </div>
-                        <div className="relative mb-4 pn">
+                        {!disabled && <div className="relative mb-4 pn">
                             <label htmlFor="pincode" className="leading-7 text-sm text-gray-600">Pincode</label>
                             <input onChange={handlePin} value={pin} type="text" id="pincode" placeholder='enter the pincode' name="pincode" className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                             <button onClick={checkServiceAbility} className=" absolute top-7 right-0 flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Check</button>
-                        </div>
+                        </div>}
                         {serviceAbility && serviceAbility != null && < p > Product can deliver in this pincode</p>}
                         {!serviceAbility && serviceAbility != null && <p className='text-red-800'> Sorry we cannot deliver the produt in this pincode</p>}
                     </div>
@@ -176,6 +183,7 @@ const Product = ({ cart, addToCart, product, variants, buyNow }) => {
     </>
 }
 export async function getServerSideProps(context) {
+    let error;
     if (!mongoose.connections[0].readyState) {
         await mongoose.connect(process.env.MONGO_URI)
     }
