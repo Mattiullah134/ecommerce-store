@@ -55,5 +55,25 @@ All orders page
 ![img8](https://user-images.githubusercontent.com/117710678/231444729-e0af37a9-47b0-4258-b1b8-b02349f7bf17.JPG)
 Order detail
 ![img9](https://user-images.githubusercontent.com/117710678/231444736-6f8f3321-4792-4a4a-bbfc-7ea33bef8075.JPG)
+User login page
+![login page](https://user-images.githubusercontent.com/117710678/232170983-6444097f-a47b-4e42-b366-e9b89385f1a7.JPG)
+user signup page
+![signup page](https://user-images.githubusercontent.com/117710678/232170986-aa467319-b730-457b-8590-8f393fe849fb.JPG)
+Admin dashboard
+![admin dashboad](https://user-images.githubusercontent.com/117710678/232170989-0fed5e40-004a-47b3-bfb0-2c66124740e8.JPG)
+Admin orders page
+![all orders page](https://user-images.githubusercontent.com/117710678/232170974-3a30226f-e7f1-4115-9835-918681aa6ac7.JPG)
+admin order detail page
+![admin order detail page](https://user-images.githubusercontent.com/117710678/232170978-07a48aa7-0c56-401f-825f-f0091d64c337.JPG)
+Admin login page
+![admin login page](https://user-images.githubusercontent.com/117710678/232170982-430cec27-f95c-4fea-a2be-01da8a303b85.JPG)
+Admin add product page
+![admin add product page](https://user-images.githubusercontent.com/117710678/232170993-55844a73-b1e7-4c08-aacb-a88ec239e1b6.JPG)
+Admin all product page
+![list all the product admin page](https://user-images.githubusercontent.com/117710678/232170998-93690f03-bee6-4a2c-af47-55857b0391dc.JPG)
+Admin product detail page
+![product detail page](https://user-images.githubusercontent.com/117710678/232171001-da5e9fd2-610e-4f58-a815-5ae64202c36b.JPG)
+
+
 
 
