@@ -5,6 +5,7 @@ import Link from 'next/link';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 const Checkout = ({ user, cart, clearCart, addToCart, removeToCart, subTotal }) => {
     const [name, setName] = useState('');
@@ -14,14 +15,56 @@ const Checkout = ({ user, cart, clearCart, addToCart, removeToCart, subTotal }) 
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
     const [pincode, setPinCode] = useState('');
-    console.log(user);
-    const { push } = useRouter();
+    const router = useRouter();
     const [disabled, setDisabled] = useState(true)
     useEffect(() => {
+        const token = JSON.parse(localStorage.getItem('myuser'))
+        if (!token) {
+            router.push('/')
+            console.log('go to the home page');
+        } else {
+
+            getUser(token);
+        }
         if (user.value) {
             setEmail(user.email)
         }
-    }, [])
+
+    }, [router.asPath])
+    const getUser = async (token) => {
+        const userDetail = await axios.post(`${process.env.NEXT_PUBLIC_HOST}/api/getuser`, { token: token.token, email: token.email });
+
+        if (userDetail.status === 200) {
+
+            setEmail(userDetail.data.email);
+            setName(userDetail.data.name);
+            setAddress(userDetail?.data?.address)
+            setPhone(userDetail?.data?.phone);
+            setPinCode(userDetail?.data?.pincode);
+            getPincode(userDetail?.data?.pincode)
+        } else {
+            toast('error while getting the user detail')
+        }
+        console.log('get user');
+
+    }
+    const getPincode = async (pin) => {
+        const validPinCode = await axios.get(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`);
+        const validPinCodeJson = await validPinCode.data;
+
+        if (Object.keys(validPinCodeJson).includes(pin.toString())) {
+            setCity(validPinCodeJson[pin][0])
+            console.log(validPinCodeJson[pin][0]);
+            setState(validPinCodeJson[pin][1])
+            setDisabled(false);
+        } else {
+            setCity('')
+            setState('')
+            setDisabled(true);
+
+        }
+        console.log('get pincode', pin);
+    }
     const inputValueHandeler = async (e) => {
         if (e.target.name === 'name') {
             setName(e.target.value)
@@ -38,18 +81,7 @@ const Checkout = ({ user, cart, clearCart, addToCart, removeToCart, subTotal }) 
         else if (e.target.name === 'pincode') {
             setPinCode(e.target.value)
             if (e.target.value.length === 5) {
-                const validPinCode = await axios.get(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`);
-                const validPinCodeJson = await validPinCode.data;
-                if (Object.keys(validPinCodeJson).includes(e.target.value)) {
-                    setCity(validPinCodeJson[e.target.value][0])
-                    setState(validPinCodeJson[e.target.value][1])
-                    setDisabled(false);
-                } else {
-                    setCity('')
-                    setState('')
-                    setDisabled(true);
-
-                }
+                getPincode(e.target.value)
             }
             else {
                 setDisabled(true);
@@ -71,27 +103,24 @@ const Checkout = ({ user, cart, clearCart, addToCart, removeToCart, subTotal }) 
 
     const handleOrder = async (e) => {
         e.preventDefault();
-        console.log(subTotal, name, address, phone, pincode, city);
         if (Object.keys(cart).length !== 0 && email && address && pincode) {
 
-            const data = { cart, subTotal, name, email, address, phone, pincode }
+            const data = { cart, subTotal, name, email, address, phone, pincode, city, state }
 
             const sendData = await axios.post(`${process.env.NEXT_PUBLIC_HOST}/api/pretransaction`, data);
-            console.log(sendData);
             if (sendData.status === 200) {
                 clearCart()
                 toast("Order Place successfully")
-                // setName('')
-                // setEmail('')
-                // setAddress('')
-                // setPhone('')
-                // setPinCode('')
-                // setCity('')
-                // setState('')
-                // push('/orders')
+                setName('')
+                setEmail('')
+                setAddress('')
+                setPhone('')
+                setPinCode('')
+                setCity('')
+                setState('')
+                push('/orders')
 
             } else if (sendData.status === 400) {
-                console.log('hi from the 400 error');
                 clearCart()
                 toast('Something went wrong')
             }
@@ -100,7 +129,13 @@ const Checkout = ({ user, cart, clearCart, addToCart, removeToCart, subTotal }) 
         }
     }
     return (
-        <div className='container mx-8 max-sm:mx-0 md:m-auto  p-10'>
+        <div className='container mx-8 min-h-screen max-sm:mx-0 md:m-auto  p-10'>
+            <Head>
+                <title>Matti's store | Checkout</title>
+                <meta name="description" content="Generated by create next app" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
             <ToastContainer
                 position="bottom-center"
                 autoClose={5000}
@@ -148,7 +183,7 @@ const Checkout = ({ user, cart, clearCart, addToCart, removeToCart, subTotal }) 
 
                     <div className=" mb-4">
                         <label htmlFor="pincode" className="leading-7 text-sm text-gray-600">Pin Code</label>
-                        <input required onChange={inputValueHandeler} type="text" id="pincode" name="pincode" className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                        <input value={pincode} required onChange={inputValueHandeler} type="text" id="pincode" name="pincode" className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                     </div>
                 </div>
 

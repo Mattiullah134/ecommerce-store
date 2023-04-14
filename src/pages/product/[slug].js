@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Products from '../../../models/Products'
 import mongoose from 'mongoose';
-import Error from 'next/error'
 const Product = ({ errorCode, cart, addToCart, product, variants, buyNow }) => {
 
 
@@ -48,7 +47,7 @@ const Product = ({ errorCode, cart, addToCart, product, variants, buyNow }) => {
                 }, 3000);
             }
             else {
-                toast("Sorry Product can not be deliever at your address")
+                toast("Sorry Product can not be deliever at your address");
                 setServiceAbility(false);
                 setTimeout(() => {
                     setServiceAbility(null);
@@ -85,7 +84,7 @@ const Product = ({ errorCode, cart, addToCart, product, variants, buyNow }) => {
                 pauseOnHover
                 theme="light"
             />
-            <div className="container px-5 py-24 mx-auto">
+            <div className="container min-h-screen px-5 py-24 mx-auto">
                 <div className="lg:w-4/5 mx-auto flex flex-wrap">
                     <img alt="ecommerce" className="object-contain object-top h-[50vh] m-auto block cursor-pointer hover:scale-105 transition-transform" src={product[0].img} />
                     <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
@@ -183,7 +182,7 @@ const Product = ({ errorCode, cart, addToCart, product, variants, buyNow }) => {
     </>
 }
 export async function getServerSideProps(context) {
-    let error;
+
     if (!mongoose.connections[0].readyState) {
         await mongoose.connect(process.env.MONGO_URI)
     }

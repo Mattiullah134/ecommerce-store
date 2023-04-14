@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router'
 import LoadingBar from 'react-top-loading-bar'
 
-
 export default function App({ Component, pageProps }) {
   const router = useRouter()
   const [progress, setProgress] = useState(0)
@@ -40,14 +39,13 @@ export default function App({ Component, pageProps }) {
         saveCart(JSON.parse(localStorage.getItem('cart')))
       }
     } catch (error) {
-      console.log(error);
       localStorage.clear();
     }
     let myuser = JSON.parse(localStorage.getItem('myuser'));
     if (myuser) {
       setUser({ value: myuser.token, email: myuser.email });
-      setKey(Math.random());
     }
+    setKey(Math.random());
   }, [router.query])
 
   const addToCart = (itemCode, itemQuantity, price, name, img, size, variant) => {
@@ -105,8 +103,10 @@ export default function App({ Component, pageProps }) {
       onLoaderFinished={() => setProgress(0)}
       waitingTime={180}
     />
-    {key && <NavBar logout={logout} user={user} key={key} cart={cart} addToCart={addToCart} removeToCart={removeToCart} clearCart={clearCart} subTotal={subTotal} />}
+
+    {key && !router.pathname.includes('/admin') && <NavBar logout={logout} user={user} key={key} cart={cart} addToCart={addToCart} removeToCart={removeToCart} clearCart={clearCart} subTotal={subTotal} />}
     <Component user={user} cart={cart} addToCart={addToCart} removeToCart={removeToCart} clearCart={clearCart} buyNow={buyNow} subTotal={subTotal} {...pageProps} />
-    <Footer />
+    {!router.pathname.includes('/admin') && <Footer />}
+
   </>
 }

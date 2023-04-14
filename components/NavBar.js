@@ -15,7 +15,7 @@ const NavBar = ({ logout, user, cart, addToCart, removeToCart, clearCart, subTot
     const [sideBar, setSideBar] = useState(true)
     const ref = useRef()
     useEffect(() => {
-        // Object.keys(cart).length !== 0 && setSideBar(false)
+        Object.keys(cart).length !== 0 && setSideBar(false)
         let exempted = ['/checkout', '/orders', '/order', '/myaccount']
         if (exempted.includes(router.pathname)) {
             setSideBar(false)
@@ -26,13 +26,7 @@ const NavBar = ({ logout, user, cart, addToCart, removeToCart, clearCart, subTot
     // console.log(user);
     const toggleCart = () => {
         setSideBar(!sideBar)
-        // if (ref.current.classList.contains('translate-x-full')) {
-        //     ref.current.classList.remove('translate-x-full');
-        //     ref.current.classList.add('translate-x-0');
-        // } else if (!ref.current.classList.contains('translate-x-full')) {
-        //     ref.current.classList.remove('translate-x-0');
-        //     ref.current.classList.add('translate-x-full');
-        // }
+
     }
     const logoutHandler = () => {
         logout();

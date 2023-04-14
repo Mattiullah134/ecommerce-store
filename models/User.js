@@ -10,6 +10,21 @@ const UserSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    phone: {
+        type: Number,
+        default: ''
+
+    },
+    address: {
+        type: String,
+        default: ''
+
+    },
+    pincode: {
+        type: Number,
+        default: ''
+
+    },
     password: {
         type: String,
         required: true
