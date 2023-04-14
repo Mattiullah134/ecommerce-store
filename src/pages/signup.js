@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify';
 import { useRouter } from 'next/router';
 import 'react-toastify/dist/ReactToastify.css';
+import Head from 'next/head';
 
 const SignUp = () => {
     const router = new useRouter();
